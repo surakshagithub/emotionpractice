@@ -11,6 +11,10 @@ const deliveryDetails = [
     value: "_ _ _",
   },
   {
+    title: "Shipment ID",
+    value: "_ _ _",
+  },
+  {
     title: "PLANNED AT",
     value: "Mar 07,01:45",
   },
