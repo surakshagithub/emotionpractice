@@ -30,6 +30,10 @@ const deliveryTicket = [
     value: "1212121212",
   },
   {
+    title: "PHONE NO.",
+    value: "1212121212",
+  },
+  {
     title: "CARRIER NO.",
     value: "23232",
   },
