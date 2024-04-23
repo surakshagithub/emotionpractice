@@ -38,6 +38,10 @@ const deliveryDetails = [
     title: "TRUCK",
     value: "1352M2/107 - LCR",
   },
+  {
+    title: "demo row",
+    value: "demo value",
+  },
 ];
 
 function DeliveryDetails() {
