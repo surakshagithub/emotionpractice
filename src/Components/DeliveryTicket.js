@@ -34,6 +34,10 @@ const deliveryTicket = [
     value: "23232",
   },
   {
+    title: "CARRIER Name",
+    value: "23232",
+  },
+  {
     title: "BOL#",
     value: "23232",
   },
