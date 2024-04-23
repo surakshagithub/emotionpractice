@@ -1,19 +1,19 @@
 name: Rebase Pull Request
 
 on:
-  pull_request:
-    types: [labeled]
+  issue_comment:
+    types: [created]
 
 jobs:
   main:
-    if: ${{ github.event.label.name == 'rebase' }}
+    if: ${{ github.event.comment.body == '/rebase' && github.event.issue.pull_request }}
     name: Rebase
     runs-on: ubuntu-latest
     steps:
       - name: git checkout
         uses: actions/checkout@v2
         with:
-          token: ${{ secrets.PERSONAL_ACCESSq_TOKEN }}
+          token: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
           fetch-depth: 0
 
       - name: automatic rebase
