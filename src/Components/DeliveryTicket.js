@@ -22,6 +22,10 @@ const deliveryTicket = [
     value: "23232",
   },
   {
+    title: "ORDER NO.",
+    value: "23232",
+  },
+  {
     title: "PHONE NO.",
     value: "1212121212",
   },
