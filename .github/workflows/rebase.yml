@@ -1,28 +1,35 @@
-name: Rebase Pull Request
-
+name: Automatic Rebase
 on:
   issue_comment:
     types: [created]
-
 jobs:
-  main:
-    if: ${{ github.event.comment.body == '/rebase' && github.event.issue.pull_request }}
+  rebase:
     name: Rebase
     runs-on: ubuntu-latest
+    if: >-
+      github.event.issue.pull_request != '' && 
+      (
+        contains(github.event.comment.body, '/rebase') || 
+        contains(github.event.comment.body, '/autosquash')
+      )
     steps:
-      - name: git checkout
-        uses: actions/checkout@v2
+      - name: Checkout the latest code
+        uses: actions/checkout@v3
         with:
-          token: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
-          fetch-depth: 0
+          token: ${{ secrets.GITHUB_TOKEN }}
+          fetch-depth: 0 # otherwise, you will fail to push refs to dest repo
 
-      - name: automatic rebase
-        uses: cirrus-actions/rebase@1.5
+      - name: Automatic Rebase
+        uses: cirrus-actions/rebase@1.8
+        with:
+          autosquash: ${{ contains(github.event.comment.body, '/autosquash') || contains(github.event.comment.body, '/rebase-autosquash') }}
         env:
-          GITHUB_TOKEN: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: remove label
-        if: always()
-        uses: actions-ecosystem/action-remove-labels@v1
-        with:
-          labels: rebase
+      - name: Success message
+        if: ${{ success() }}
+        run: echo "Rebase operation was successful."
+
+      - name: Failure message
+        if: ${{ failure() }}
+        run: echo "Rebase operation failed."
