@@ -46,6 +46,10 @@ const deliveryDetails = [
     title: "demo row",
     value: "demo value",
   },
+  {
+    title: "demo row1",
+    value: "demo value",
+  },
 ];
 
 function DeliveryDetails() {
